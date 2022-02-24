@@ -9,6 +9,11 @@ Com a falta de um local para gerir tais conteúdos, o processo de acompanhamento
      
 Para solucionar este problema, o Grupo 2 desenvolverá para o Sistema Educacional a gestão de conteúdo programático, com a criação por usuário autorizado (professor) e visualização aos usuários finais (alunos). A criação de artefatos compreenderá diferentes maneiras de input, como: texto, imagens, vídeos, ou arquivos carregados pelo usuário. Além disso, a visualização permitirá a categorização do conteúdo para facilitar a navegação do usuário final, entrega uma experiência intuitiva, tendo como o público alvo tanto os alunos quanto os professores.
 
+## Personas
+
+1. Victor Marx tem 28 anos, atualmente é um estudante do curso Sistemas de Informação a distância em uma universidade. Como estudante, e fazendo diversas disciplinas por semestre, Victor precisa ter acesso fácil e objetivo aos diversos conteúdos propostos pelos orientadores das suas disciplinas.
+2. Eduardo Augusto de 43 anos, é professor no curso de Sistemas de Informação a distância em uma determinada disciplina. Para lecionar a disciplina, ele necessita publicar diversos conteúdos categorizados por tipo e módulo, e verificar o progresso de seus alunos com relação a esses conteúdos.
+3. Marcos de 30 anos trabalha na universidade como analista de sistemas, ele tem como uma de suas principais funções, gerenciar algumas permissões aos usuários em sistemas, e um dos casos é gerenciar conteúdos de alunos e professores.
 
 ## Histórias de Usuários
 
