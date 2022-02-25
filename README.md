@@ -1,5 +1,17 @@
 # DAD-G2
-Desenvolvimento de Aplicações Disitribuidas - Grupo 2
+Desenvolvimento de Aplicações Distribuídas - Grupo 2
+
+## Integrantes
+
+- Cleverson Rodrigues Procopio
+- Eduardo Lacerda Ribeiro
+- Gabriel Medeiros Giancotti
+- Guilherme Bruno Rodrigues Silva
+- Jefferson Adriano Conceição Monteiro
+- Juan de Almeida Silva
+- Lucas Nascimento Lopes
+- Luiz Guilherme dos Santos Acerbi
+- Willian Souza Telatin
 
 ## Projeto - Gestão de conteúdo programático 
 
