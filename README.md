@@ -24,6 +24,8 @@ Para solucionar este problema, o Grupo 2 desenvolverá para o Sistema Educaciona
 | Administrador | Ter a possibilidade de cadastrar diferentes tipos de matéria.                                             | Aproveitamento futuro de professores e alunos.                                                  |
 | Aluno         | Acompanhar em forma de porcentagem o meu progresso de estudo dentro de um tópico.                         | Uma melhor visibilidade e entendimento de meu progresso.                                        |
 | Aluno         | Ser capaz de anexar comentários relacionados a minha experiência em um determinado tópico ou matéria.     | Compartilhar experiências com os demais alunos.                                                 |
+| Orientador    | Identificar quais tópicos tiveram menor aproveitamento nos quizz.					    | Rever o conteúdo e o deixar mais claro e didático.					      |
+
 
 ## Requistos
 As tabelas que se seguem apresentam os requisitos funcionais e não funcionais que detalham o escopo do projeto.
