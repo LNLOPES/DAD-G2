@@ -3,6 +3,7 @@ Desenvolvimento de Aplicações Distribuídas - Grupo 2
 
 ## Integrantes
 
+- André Lara Oliveira e Silva
 - Cleverson Rodrigues Procopio
 - Eduardo Lacerda Ribeiro
 - Gabriel Medeiros Giancotti
