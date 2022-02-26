@@ -3,16 +3,16 @@ Desenvolvimento de Aplicações Distribuídas - Grupo 2
 
 ## Integrantes
 
-- André Lara Oliveira e Silva
-- Cleverson Rodrigues Procopio
-- Eduardo Lacerda Ribeiro
-- Gabriel Medeiros Giancotti
-- Guilherme Bruno Rodrigues Silva
-- Jefferson Adriano Conceição Monteiro
-- Juan de Almeida Silva
-- Lucas Nascimento Lopes
-- Luiz Guilherme dos Santos Acerbi
-- Willian Souza Telatin
+- André Lara Oliveira e Silva - Mobile
+- Cleverson Rodrigues Procopio - Mobile
+- Eduardo Lacerda Ribeiro - Back-End
+- Gabriel Medeiros Giancotti - Mobile
+- Guilherme Bruno Rodrigues Silva - Front-End
+- Jefferson Adriano Conceição Monteiro - Front-End
+- Juan de Almeida Silva - Back-End
+- Lucas Nascimento Lopes - Arquiteto de software
+- Luiz Guilherme dos Santos Acerbi - Back-End
+- Willian Souza Telatin - Front-End
 
 ## Projeto - Gestão de conteúdo programático 
 
