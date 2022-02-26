@@ -63,6 +63,10 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 | Nossa aplicação deve rodar em um servidor WEB. | Baixo      |
 | O sistema deve ser responsivo.                 | Médio      |
 
+## Planejamento
+Nosso planejamento está sendo feito pelo kanban que pode ser acessado pelo link abaixo.
+https://tasks.office.com/sgapucminasbr.onmicrosoft.com/pt-BR/Home/Planner#/plantaskboard?groupId=579ade16-65eb-431b-897b-744f842fb98f&planId=wAil_KrNBU6L9ZudKTwsfWQADeCl
+
 
 
 
