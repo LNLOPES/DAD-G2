@@ -19,7 +19,7 @@ Nessa parte do documento, serão abordados os temas de personas, histórias de u
 | Orientador    | Identificar quais tópicos tiveram menor aproveitamento nos quizzes.					  | Rever o conteúdo e o deixar mais claro e didático.					      |
 
 
-## Requistos
+## Requisitos
 As tabelas que se seguem apresentam os requisitos funcionais e não funcionais que detalham o escopo do projeto.
 
 ### Requisitos Funcionais
