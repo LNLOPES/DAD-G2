@@ -7,15 +7,14 @@ namespace API_Contents.Controllers
     // ROLES [ADM, TEACHER, STUDENT]
     [ApiController]
     [Route("[controller]")]
-    public class ContentController : ControllerBase
+    public class ContentsController : ControllerBase
     {
 
         private readonly IContentsService contentService;
-        public ContentController(IContentsService contentService)
+        public ContentsController(IContentsService contentService)
         {
             this.contentService = contentService;
         }
-
 
         [HttpGet]
         public async Task<IActionResult> getContents()
@@ -34,6 +33,21 @@ namespace API_Contents.Controllers
         public async Task<IActionResult> postContent([FromForm] SaveContentRequest content, IFormFile file)
         {
             return Created("", await this.contentService.saveContent(content, file));
+        }
+
+        [Route("{id}")]
+        [HttpPatch]
+        public async Task<IActionResult> patchContent([FromRoute] Guid id, [FromForm] SaveContentRequest content, IFormFile file)
+        {
+            return NoContent();
+        }
+
+        [Route("{id}")]
+        [HttpDelete]
+        public async Task<IActionResult> deleteContent([FromRoute] Guid id)
+        {
+            return NoContent();
+            //return Created("", await this.contentService.saveContent(content, file));
         }
     }
 }
