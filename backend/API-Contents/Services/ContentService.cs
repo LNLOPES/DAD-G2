@@ -31,7 +31,7 @@ namespace API_Contents.Services
         }
 
         public async Task<Content> findContentById(Guid id)
-        {
+        {   
             Content? foundContent = contents.Find(content => content.Id == id);
 
             if(foundContent == null)

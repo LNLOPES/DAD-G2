@@ -2,7 +2,7 @@
 
 namespace API_Contents.Models.DTOs
 {
-    public class SaveContentRequest
+    public class SaveTopicRequest
     {
         [Required]
         [StringLength(100)]
@@ -11,8 +11,6 @@ namespace API_Contents.Models.DTOs
         [StringLength(1000)]
         public string? description { get; set; }
         [Required]
-        public Guid disciplineId { get; set; }
-        [Required]
-        public Guid topicId { get; set; }
+        public Guid? disciplineId { get; set; } 
     }
 }

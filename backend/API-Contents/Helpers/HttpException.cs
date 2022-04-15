@@ -8,8 +8,8 @@ namespace API_Contents.Helpers
         public HttpException(int statusCode, string message) =>
             (StatusCode, Message) = (statusCode, message);
 
-        public int StatusCode { get; }
-        public string? Message { get; }
+        public int StatusCode { get; set; }
+        public string Message { get; set; }
     }
 
     public class HttpResponseExceptionFilter : IActionFilter, IOrderedFilter
