@@ -1,0 +1,40 @@
+.ajuste{
+    width:250px;
+}
+
+.ajuste2{
+    margin-right:550px;
+}
+
+.ajuste3{
+    margin-right:50px;
+}
+
+.left{
+    margin-left:-650px;
+    font-size: 14px;
+    
+}
+.left2{
+    margin-left:600px;
+    
+}
+.left3{
+    margin-left:-45px;
+    
+}
+.list{
+    border-width: medium;
+    border-style: solid;
+    border-color: #000000;
+    width: 280px;
+    height: 350px;
+}
+.fundo{
+    background-color: darkslategrey ;
+}
+
+#linha-vertical {
+    height: 500px;
+    border-right: 1px solid black;
+}
