@@ -1,4 +1,6 @@
-﻿namespace API_Contents.Models.Entities
+﻿using System;
+
+namespace API_Contents.Models.Entities
 {
     public class Content
     {
