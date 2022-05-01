@@ -5,6 +5,6 @@ namespace API_Contents.Models.Entities
     {
         public Guid Id { get; set; }
         public Guid DisciplineId { get; set; }
-        public Guid StudentId { get; set; }
+        public Guid StudentsIds { get; set; }
     }
 }

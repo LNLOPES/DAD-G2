@@ -11,6 +11,8 @@ builder.Services.AddScoped<IFirebaseService, FirebaseService>();
 builder.Services.AddScoped<IContentsRepository, ContentsRepository>();
 builder.Services.AddScoped<ITopicsService, TopicService>();
 builder.Services.AddScoped<ITopicsRepository, TopicsRepository>();
+builder.Services.AddScoped<IDisciplinesService, DisciplineService>();
+builder.Services.AddScoped<IDisciplinesRepository, DisciplinesRepository>();
 
 
 // Add controllers to the container.

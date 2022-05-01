@@ -10,42 +10,44 @@ namespace API_Contents.Controllers
     public class DisciplinesController : ControllerBase
     {
 
-        //private readonly IContentsService contentService;
-        public DisciplinesController(IContentsService contentService)
+        private readonly IDisciplinesService disciplineService;
+        public DisciplinesController(IDisciplinesService disciplineService)
         {
-            //this.contentService = contentService;
+            this.disciplineService = disciplineService;
         }
 
         [HttpGet]
         public async Task<IActionResult> getDisciplines()
         {
-            return Ok();
+            return Ok(await this.disciplineService.getDisciplines());
         }
 
         [Route("{id}")]
         [HttpGet]
         public async Task<IActionResult> findDisciplineById(Guid id)
         {
-            return Ok();
+            return Ok(await this.disciplineService.findDisciplineById(id));
         }
 
         [HttpPost]
-        public async Task<IActionResult> postDiscipline(SaveDisciplineRequest discipline)
+        public async Task<IActionResult> postDiscipline([FromForm] SaveDisciplineRequest discipline)
         {
-            return Created("", discipline);
+            return Created("", await this.disciplineService.saveDiscipline(discipline));
         }
 
         [Route("{id}")]
         [HttpPatch]
-        public async Task<IActionResult> patchDiscipline([FromRoute] Guid id, SaveDisciplineRequest discipline)
+        public async Task<IActionResult> patchDiscipline([FromRoute] Guid id, [FromForm] SaveDisciplineRequest discipline)
         {
-            return NoContent();
+            return Ok(await this.disciplineService.patchDiscipline(id, discipline));
         }
 
         [Route("{id}")]
         [HttpDelete]
         public async Task<IActionResult> deleteDiscipline([FromRoute] Guid id)
         {
+            await disciplineService.deleteDiscipline(id);
+
             return NoContent();
         }
     }
