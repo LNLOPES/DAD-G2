@@ -1,11 +1,13 @@
 using API_Contents.Services;
 using API_Contents.Helpers;
+using API_Contents.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 builder.Services.AddScoped<IContentsService, ContentService>();
 builder.Services.AddScoped<IFirebaseService, FirebaseService>();
+builder.Services.AddScoped<IContentsRepository, ContentsRepository>();
 
 // Add controllers to the container.
 builder.Services.AddControllers(options =>

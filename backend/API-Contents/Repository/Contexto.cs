@@ -1,7 +1,7 @@
 ﻿using API_Contents.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API_Contents.Dados
+namespace API_Contents.Repository
 {
     public partial class Contexto : DbContext
     {
@@ -17,6 +17,9 @@ namespace API_Contents.Dados
         }
 
         public virtual DbSet<Content> Contents { get; set; }
+        public virtual DbSet<Topic> Topics { get; set; }
+        public virtual DbSet<Discipline> Disciplines { get; set; }
+        public virtual DbSet<DisciplineStudent> DisciplineStudents { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -47,7 +50,7 @@ namespace API_Contents.Dados
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
+            modelBuilder.HasAnnotation("Relational:Collation", "UTF-8");
 
             modelBuilder.Entity<Content>(entity =>
             {
@@ -64,6 +67,43 @@ namespace API_Contents.Dados
                 entity.Property(e => e.DisciplineId).HasColumnName("DisciplineId");
 
                 entity.Property(e => e.TopicId).HasColumnName("TopicId");
+            });
+
+            modelBuilder.Entity<Discipline>(entity =>
+            {
+                entity.ToTable("Discipline");
+
+                entity.Property(e => e.Id).HasColumnName("Id");
+
+                entity.Property(e => e.Title).HasColumnName("Title");
+
+                entity.Property(e => e.Description).HasColumnName("Description");
+
+                entity.Property(e => e.TeacherId).HasColumnName("TeacherId");
+            });
+
+            modelBuilder.Entity<Topic>(entity =>
+            {
+                entity.ToTable("Topic");
+
+                entity.Property(e => e.Id).HasColumnName("Id");
+
+                entity.Property(e => e.Title).HasColumnName("Title");
+
+                entity.Property(e => e.Description).HasColumnName("Description");
+
+                entity.Property(e => e.DisciplineId).HasColumnName("DisciplineId");
+            });
+
+            modelBuilder.Entity<DisciplineStudent>(entity =>
+            {
+                entity.ToTable("DisciplineStudent");
+
+                entity.Property(e => e.Id).HasColumnName("Id");
+
+                entity.Property(e => e.DisciplineId).HasColumnName("DisciplineId");
+
+                entity.Property(e => e.StudentId).HasColumnName("StudentId");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -2,44 +2,43 @@
 using API_Contents.Helpers;
 using API_Contents.Models.DTOs;
 using API_Contents.Models.Entities;
+using API_Contents.Repository;
 
 namespace API_Contents.Services
 {
     public interface IContentsService
     {
-        public Task<Content[]> getContents();
+        public Task<List<Content>> getContents();
         public Task<Content> findContentById(Guid id);
         public Task<Content> saveContent(SaveContentRequest content, IFormFile? file);
+        public Task<bool> deleteContent(Guid id);
     }
+
     public class ContentService : IContentsService
     {
         private readonly IFirebaseService firebaseService;
-        public ContentService(IFirebaseService firebaseService)
+        private readonly IContentsRepository contentRepository;
+        public ContentService(IFirebaseService firebaseService, IContentsRepository contentRepository)
         {
             this.firebaseService = firebaseService;
+            this.contentRepository = contentRepository;
         }
 
-        static private List<Content> contents = new List<Content> {
-            new Content { Title = "Material didático Ex:1", Description = "", DisciplineId = Guid.NewGuid(), Id = Guid.NewGuid() },
-            new Content { Title = "Matéria Prova", Description = "Ajuda para estudar a prova", DisciplineId = Guid.NewGuid(), Id = Guid.NewGuid() },
-            new Content { Title = "Some test content", Description = "content description", DisciplineId = Guid.NewGuid(), Id = Guid.NewGuid() }
-        };
-
-        public async Task<Content[]> getContents()
+        public async Task<List<Content>> getContents()
         {
-            return contents.ToArray();
+            return await contentRepository.getContents();
         }
 
         public async Task<Content> findContentById(Guid id)
-        {   
-            Content? foundContent = contents.Find(content => content.Id == id);
+        {
+            Content? foundContent = await contentRepository.findContentById(id);
 
-            if(foundContent == null)
+            if (foundContent == null)
             {
                 throw new HttpException(404, "Content not found");
             }
-
-            return foundContent;
+            else
+                return foundContent;
         }
 
         public async Task<Content> saveContent(SaveContentRequest content, IFormFile? file)
@@ -47,22 +46,26 @@ namespace API_Contents.Services
             Content newContent = new Content();
             newContent.Id = Guid.NewGuid();
 
-            if(file != null)
+            if (file != null)
             {
-                string firebaseUploadDir = $"{content.disciplineId}/{content.topicId}/{newContent.Id}";
+                string firebaseUploadDir = $"{content.DisciplineId}/{content.TopicId}/{newContent.Id}";
                 string fileUrl = await firebaseService.uploadFile(firebaseUploadDir, file.FileName, file.OpenReadStream());
                 newContent.Url = fileUrl;
             }
 
-            newContent.Title = content.title;
-            newContent.Description = content.description; 
-            newContent.DisciplineId = content.disciplineId;
-            newContent.TopicId = content.topicId;
+            newContent.Title = content.Title;
+            newContent.Description = content.Description;
+            newContent.DisciplineId = content.DisciplineId;
+            newContent.TopicId = content.TopicId;
 
-            contents.Add(newContent);
-            
-            return newContent;
+            return await contentRepository.saveContent(newContent);
         }
 
+        public async Task<bool> deleteContent(Guid Id)
+        {
+            var content = this.findContentById(Id);
+
+            return await contentRepository.deleteContent(content.Result);
+        }
     }
 }

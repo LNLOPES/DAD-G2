@@ -6,11 +6,11 @@ namespace API_Contents.Models.DTOs
     {
         [Required]
         [StringLength(100)]
-        public string? title { get; set; }
+        public string? Title { get; set; }
         [Required]
         [StringLength(1000)]
-        public string? description { get; set; }
-        public Guid? teacherId { get; set; } 
-        public Guid[]? studentsIds { get; set; }
+        public string? Description { get; set; }
+        public Guid? TeacherId { get; set; } 
+        public Guid[]? StudentsIds { get; set; }
     }
 }

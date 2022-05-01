@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace API_Contents.Models.DTOs
 {
@@ -7,13 +6,13 @@ namespace API_Contents.Models.DTOs
     {
         [Required]
         [StringLength(100)]
-        public string? title { get; set; }
+        public string? Title { get; set; }
         [Required]
         [StringLength(1000)]
-        public string? description { get; set; }
+        public string? Description { get; set; }
         [Required]
-        public Guid disciplineId { get; set; }
+        public Guid DisciplineId { get; set; }
         [Required]
-        public Guid topicId { get; set; }
+        public Guid TopicId { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace API_Contents.Helpers
             (StatusCode, Message) = (statusCode, message);
 
         public int StatusCode { get; set; }
-        public string Message { get; set; }
+        public override string Message { get; }
     }
 
     public class HttpResponseExceptionFilter : IActionFilter, IOrderedFilter
