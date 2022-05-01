@@ -5,23 +5,26 @@ namespace API_Contents.Repository
 {
     public interface IContentsRepository
     {
-        public Task<List<Content>> getContents(Contexto? contexto = null);
-        public Task<Content> findContentById(Guid id, Contexto? contexto = null);
-        public Task<Content> saveContent(Content content, Contexto? contexto = null);
-        public Task<bool> deleteContent(Content content, Contexto? contexto = null);
+        public Task<List<Content>> getContents();
+        public Task<Content> findContentById(Guid id);
+        public Task<Content> saveContent(Content content);
+        public void deleteContent(Content content);
+        public Task<Content> patchContent(Content content);
     }
 
     public class ContentsRepository : IContentsRepository
     {
-        public async Task<Content> findContentById(Guid id, Contexto? contexto = null)
-        {
-            if (contexto == null)
-            {
-                contexto = new Contexto();
-            }
+        Contexto contexto;
 
+        public ContentsRepository(Contexto contexto)
+        {
+            this.contexto = contexto;
+        }
+
+        public async Task<Content> findContentById(Guid id)
+        {
 #pragma warning disable CS8600 // Conversão de literal nula ou possível valor nulo em tipo não anulável.
-            Content contentReturn = (from c in contexto.Contents
+            Content contentReturn = (from c in this.contexto.Contents
                                      where id == c.Id
                                      select new Content
                                      {
@@ -37,14 +40,9 @@ namespace API_Contents.Repository
             return await Task.FromResult(contentReturn);
         }
 
-        public async Task<List<Content>> getContents(Contexto? contexto = null)
+        public async Task<List<Content>> getContents()
         {
-            if (contexto == null)
-            {
-                contexto = new Contexto();
-            }
-
-            return await Task.FromResult((from c in contexto.Contents
+            return await Task.FromResult((from c in this.contexto.Contents
                                           select new Content
                                           {
                                               Id = c.Id,
@@ -56,28 +54,29 @@ namespace API_Contents.Repository
                                           }).ToList());
         }
 
-        public async Task<Content> saveContent(Content content, Contexto? contexto = null)
+        public async Task<Content> saveContent(Content content)
         {
-            if (contexto == null)
-                contexto = new Contexto();
+            this.contexto.Add(content);
 
-            contexto.Add(content);
-
-            contexto.SaveChanges();
+            this.contexto.SaveChanges();
 
             return await Task.FromResult(content);
         }
 
-        public async Task<bool> deleteContent(Content content, Contexto? contexto = null)
+        public void deleteContent(Content content)
         {
-            if (contexto == null)
-                contexto = new Contexto();
+            this.contexto.Contents.Remove(content);
 
-            contexto.Remove(content);
+            this.contexto.SaveChanges();
+        }
 
-            contexto.SaveChanges();
+        public async Task<Content> patchContent(Content content)
+        {
+            this.contexto.Update(content);
 
-            return await Task.FromResult(true);
+            this.contexto.SaveChanges();
+
+            return await Task.FromResult(content);
         }
     }
 }

@@ -2,3 +2,6 @@
 
 # CS8603: Possível retorno de referência nula.
 dotnet_diagnostic.CS8603.severity = silent
+
+# CS8767: A nulidade de tipos de referência no tipo de parâmetro não corresponde ao membro implementado implicitamente (possivelmente devido a atributos de nulidade).
+dotnet_diagnostic.CS8767.severity = silent

@@ -11,7 +11,8 @@ namespace API_Contents.Services
         public Task<List<Content>> getContents();
         public Task<Content> findContentById(Guid id);
         public Task<Content> saveContent(SaveContentRequest content, IFormFile? file);
-        public Task<bool> deleteContent(Guid id);
+        public Task deleteContent(Guid id);
+        public Task<Content> patchContent(Guid id, SaveContentRequest content, IFormFile? file);
     }
 
     public class ContentService : IContentsService
@@ -61,11 +62,30 @@ namespace API_Contents.Services
             return await contentRepository.saveContent(newContent);
         }
 
-        public async Task<bool> deleteContent(Guid Id)
+        public async Task deleteContent(Guid id)
         {
-            var content = this.findContentById(Id);
+            var content = await this.findContentById(id);
 
-            return await contentRepository.deleteContent(content.Result);
+            contentRepository.deleteContent(content);
+        }
+
+        public async Task<Content> patchContent(Guid id, SaveContentRequest updateContent, IFormFile file)
+        {
+            var content = await this.findContentById(id);
+
+            if (file != null)
+            {
+                string firebaseUploadDir = $"{content.DisciplineId}/{content.TopicId}/{id}";
+                string fileUrl = await firebaseService.uploadFile(firebaseUploadDir, file.FileName, file.OpenReadStream());
+                content.Url = fileUrl;
+            }
+
+            content.Title = updateContent.Title;
+            content.Description = updateContent.Description;
+            content.DisciplineId = updateContent.DisciplineId;
+            content.TopicId = updateContent.TopicId;
+
+            return await contentRepository.patchContent(content);
         }
     }
 }
