@@ -39,15 +39,16 @@ namespace API_Contents.Controllers
         [HttpPatch]
         public async Task<IActionResult> patchContent([FromRoute] Guid id, [FromForm] SaveContentRequest content, IFormFile file)
         {
-            return NoContent();
+            return Ok(await this.contentService.patchContent(id, content, file));
         }
 
         [Route("{id}")]
         [HttpDelete]
         public async Task<IActionResult> deleteContent([FromRoute] Guid id)
         {
+            await contentService.deleteContent(id);
+
             return NoContent();
-            //return Created("", await this.contentService.saveContent(content, file));
         }
     }
 }
