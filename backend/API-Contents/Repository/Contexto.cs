@@ -103,7 +103,7 @@ namespace API_Contents.Repository
 
                 entity.Property(e => e.DisciplineId).HasColumnName("DisciplineId");
 
-                entity.Property(e => e.StudentId).HasColumnName("StudentId");
+                entity.Property(e => e.StudentsIds).HasColumnName("StudentsIds");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -11,6 +11,6 @@ namespace API_Contents.Models.DTOs
         [StringLength(1000)]
         public string? Description { get; set; }
         public Guid? TeacherId { get; set; } 
-        public Guid[]? StudentsIds { get; set; }
+        public List<Guid>? StudentsIds { get; set; }
     }
 }

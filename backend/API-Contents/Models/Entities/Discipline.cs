@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace API_Contents.Models.Entities
 {
     public class Discipline
@@ -8,5 +7,10 @@ namespace API_Contents.Models.Entities
         public string? Title { get; set; }
         public string? Description { get; set; }
         public Guid? TeacherId { get; set; }
+    }
+
+    public class DisciplineWithStudents : Discipline
+    {
+        public virtual ICollection<Guid>? StudentsIds { get; set; }
     }
 }

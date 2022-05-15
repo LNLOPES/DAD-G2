@@ -5,10 +5,15 @@ using API_Contents.Repository;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
-builder.Services.AddSingleton<Contexto>();
+builder.Services.AddScoped<Contexto>();
 builder.Services.AddScoped<IContentsService, ContentService>();
 builder.Services.AddScoped<IFirebaseService, FirebaseService>();
 builder.Services.AddScoped<IContentsRepository, ContentsRepository>();
+builder.Services.AddScoped<ITopicsService, TopicService>();
+builder.Services.AddScoped<ITopicsRepository, TopicsRepository>();
+builder.Services.AddScoped<IDisciplinesService, DisciplineService>();
+builder.Services.AddScoped<IDisciplinesRepository, DisciplinesRepository>();
+
 
 // Add controllers to the container.
 builder.Services.AddControllers(options =>
