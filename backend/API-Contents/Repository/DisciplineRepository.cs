@@ -7,9 +7,9 @@ namespace API_Contents.Repository
     {
         public Task<List<DisciplineWithStudents>> getDisciplines();
         public Task<DisciplineWithStudents> findDisciplineById(Guid id);
-        public Task<DisciplineWithStudents> saveDiscipline(Discipline discipline);
+        public Task<DisciplineWithStudents> saveDiscipline(DisciplineWithStudents discipline);
         public void deleteDiscipline(DisciplineWithStudents discipline);
-        public Task<DisciplineWithStudents> patchDiscipline(Discipline discipline);
+        public Task<DisciplineWithStudents> patchDiscipline(DisciplineWithStudents discipline);
     }
 
     public class DisciplinesRepository : IDisciplinesRepository
@@ -31,39 +31,59 @@ namespace API_Contents.Repository
                                                            Id = d.Id,
                                                            Title = d.Title,
                                                            Description = d.Description,
-                                                           TeacherId = d.TeacherId,
-                                                           StudentsIds = (from ds in this.contexto.DisciplineStudents
-                                                                          where ds.DisciplineId == d.Id
-                                                                          select ds.StudentsIds).ToArray()
+                                                           TeacherId = d.TeacherId
                                                        }).FirstOrDefault();
 #pragma warning restore CS8600 // Conversão de literal nula ou possível valor nulo em tipo não anulável.
+
+            disciplineReturn.StudentsIds = (from ds in this.contexto.DisciplineStudents
+                                                            where ds.DisciplineId == disciplineReturn.Id
+                                                            select ds.StudentsIds).ToList();
 
             return await Task.FromResult(disciplineReturn);
         }
 
         public async Task<List<DisciplineWithStudents>> getDisciplines()
         {
-            return await Task.FromResult((from d in this.contexto.Disciplines
-                                          select new DisciplineWithStudents
-                                          {
-                                              Id = d.Id,
-                                              Title = d.Title,
-                                              Description = d.Description,
-                                              TeacherId = d.TeacherId,
-                                              StudentsIds = (from ds in this.contexto.DisciplineStudents
-                                                             where ds.DisciplineId == d.Id
-                                                             select ds.StudentsIds).ToArray()
-                                          }).ToList());
+            var retorno = await Task.FromResult((from d in this.contexto.Disciplines
+                                                 select new DisciplineWithStudents
+                                                 {
+                                                     Id = d.Id,
+                                                     Title = d.Title,
+                                                     Description = d.Description,
+                                                     TeacherId = d.TeacherId
+                                                 }).ToList());
+            foreach(var d in retorno)
+            {
+                d.StudentsIds = (from ds in this.contexto.DisciplineStudents
+                                               where ds.DisciplineId == d.Id
+                                               select ds.StudentsIds).ToList();
+            }
+
+
+            return retorno;
         }
 
-        public async Task<DisciplineWithStudents> saveDiscipline(DisciplineWithStudents disciplineStudent, Discipline discipline)
+        public async Task<DisciplineWithStudents> saveDiscipline(DisciplineWithStudents discipline)
         {
-            this.contexto.Add(disciplineStudent);
-            this.contexto.Add(discipline);
+            DisciplineStudent disciplineStudent = new DisciplineStudent();
+            disciplineStudent.DisciplineId = discipline.Id;
 
+            if(discipline.StudentsIds != null && discipline.StudentsIds.Count > 0)
+            {
+                foreach (var i in discipline.StudentsIds)
+                {
+                    disciplineStudent.StudentsIds = i;
+                    this.contexto.Add(disciplineStudent);
+                    this.contexto.SaveChanges();
+
+                }
+            }
+           
+            
+            this.contexto.Add(discipline);
             this.contexto.SaveChanges();
 
-            return await Task.FromResult(disciplineStudent);
+            return await Task.FromResult(discipline);
         }
 
         
@@ -75,7 +95,7 @@ namespace API_Contents.Repository
             this.contexto.SaveChanges();
         }
 
-        public async Task<DisciplineWithStudents> patchDiscipline(Discipline discipline)
+        public async Task<DisciplineWithStudents> patchDiscipline(DisciplineWithStudents discipline)
         {
             this.contexto.Update(discipline);
 

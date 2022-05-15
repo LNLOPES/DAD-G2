@@ -11,6 +11,6 @@ namespace API_Contents.Models.Entities
 
     public class DisciplineWithStudents : Discipline
     {
-        public Guid[]? StudentsIds { get; set; }
+        public virtual ICollection<Guid>? StudentsIds { get; set; }
     }
 }

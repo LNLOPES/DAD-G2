@@ -10,9 +10,9 @@ namespace API_Contents.Services
     {
         public Task<List<DisciplineWithStudents>> getDisciplines();
         public Task<DisciplineWithStudents> findDisciplineById(Guid id);
-        public Task<DisciplineWithStudents> saveDiscipline(SaveDisciplineRequest topic);
+        public Task<DisciplineWithStudents> saveDiscipline(SaveDisciplineRequest discipline);
         public Task deleteDiscipline(Guid id);
-        public Task<DisciplineWithStudents> patchDiscipline(Guid id, SaveDisciplineRequest topic);
+        public Task<DisciplineWithStudents> patchDiscipline(Guid id, SaveDisciplineRequest discipline);
     }
 
     public class DisciplineService : IDisciplinesService
@@ -49,6 +49,7 @@ namespace API_Contents.Services
             newDiscipline.Title = DisciplineWithStudents.Title;
             newDiscipline.Description = DisciplineWithStudents.Description;
             newDiscipline.TeacherId = DisciplineWithStudents.TeacherId;
+            newDiscipline.StudentsIds = DisciplineWithStudents.StudentsIds;
 
             return await disciplineRepository.saveDiscipline(newDiscipline);
         }
@@ -60,14 +61,14 @@ namespace API_Contents.Services
             disciplineRepository.deleteDiscipline(DisciplineWithStudents);
         }
 
-        public async Task<DisciplineWithStudents> patchDiscipline(Guid id, SaveDisciplineRequest updateTopic)
+        public async Task<DisciplineWithStudents> patchDiscipline(Guid id, SaveDisciplineRequest updatediscipline)
         {
             var DisciplineWithStudents = await this.findDisciplineById(id);
 
 
-            DisciplineWithStudents.Title = updateTopic.Title;
-            DisciplineWithStudents.Description = updateTopic.Description;
-            DisciplineWithStudents.TeacherId = updateTopic.TeacherId;
+            DisciplineWithStudents.Title = updatediscipline.Title;
+            DisciplineWithStudents.Description = updatediscipline.Description;
+            DisciplineWithStudents.TeacherId = updatediscipline.TeacherId;
 
             return await disciplineRepository.patchDiscipline(DisciplineWithStudents);
         }
