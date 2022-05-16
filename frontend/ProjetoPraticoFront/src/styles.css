@@ -10,6 +10,12 @@
     margin-right:50px;
 }
 
+
+
+.ajuste4{
+    margin-bottom:50px;
+}
+
 .left{
     margin-left:-650px;
     font-size: 14px;
@@ -38,3 +44,9 @@
     height: 500px;
     border-right: 1px solid black;
 }
+
+.ret4{
+    display:block;
+}
+
+
