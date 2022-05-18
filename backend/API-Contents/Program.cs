@@ -1,6 +1,7 @@
 using API_Contents.Services;
 using API_Contents.Helpers;
 using API_Contents.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +43,26 @@ var app = builder.Build();
 
 app.UseCors(_policyName);
 
+ // Adding Authentication
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                // Adding Jwt Bearer
+                .AddJwtBearer(options =>
+                {
+                    options.SaveToken = true;
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["AppSettings:Secret"]))
+                    };
+                });
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment() || app.Environment.IsStaging() || app.Environment.IsProduction())
@@ -51,7 +72,6 @@ if (app.Environment.IsDevelopment() || app.Environment.IsStaging() || app.Enviro
 
 }
 
-Console.WriteLine(app.Environment.EnvironmentName);
 
 app.UseHttpsRedirection();
 
