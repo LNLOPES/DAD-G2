@@ -33,7 +33,6 @@
         <tr>
             <th>Nome</th>
             <th>Descricao</th>
-            <th>Professor</th>
             <th>Ação</th>
         </tr>
     </thead>
@@ -42,7 +41,6 @@
             <tr *ngFor="let i of materias">
               <td>{{i.title}}</td>
               <td>{{i.description}}</td>
-              <td>{{i.teacherId}}</td>
               <td>
                 <button class="btn btn-outline-danger btn-lg" (click)="alertDeleteMateria(i.id)" type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
             </td>

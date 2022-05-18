@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +10,12 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   loginForm = this.formBuilder.group({
     login: '',
     senha: ''
   });
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private auth: AuthService ) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private auth: AuthService,private crudService:CrudService ) { }
 
   ngOnInit(): void {
     if ( this.auth.isAuthenticated() ) {
@@ -36,14 +36,33 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+  
+
+
+    this.crudService.Autenticacao(value).subscribe(
+      (data:any) => {
+        localStorage.setItem("token", data);
+
+      },
+      (error: any)=> {
+        console.error('ERROR: ',error);
+      }
+      );
+    
+
     if ( value.login?.toLowerCase() == "aluno" ) {
       localStorage.setItem("login", "aluno");
+
+
     } else if ( value.login?.toLowerCase() == "professor" ) {
       localStorage.setItem("login", "professor");
+
     } else if ( value.login?.toLowerCase() == "cordenador" ) {
       localStorage.setItem("login", "cordenador");
+
     } else {
       alert("Login não encontrado");
+
       return;
     }
 

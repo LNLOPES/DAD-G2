@@ -19,8 +19,11 @@ export class CrudService {
     
   }
 
-  
- 
+
+  public Autenticacao(fd:any) {
+    return this.http.post('http://victorgontijo-001-site1.htempurl.com/api/Autenticacao/Login',fd);
+  }
+
   public criaMateria(mat:any){
     return this.http.post('/api/Disciplines',mat).subscribe((data:any) => {
       console.log(data);
@@ -46,6 +49,7 @@ export class CrudService {
       console.error('ERROR: ',error);
     })
   }
+
 
   public createContent(mat:any) {
     return this.http.post('/api/Contents',mat).subscribe((data:any) => {
