@@ -41,7 +41,9 @@ export class LoginComponent implements OnInit {
 
     this.crudService.Autenticacao(value).subscribe(
       (data:any) => {
-        localStorage.setItem("token", data);
+        localStorage.setItem("token", data.Bearer);
+        localStorage.setItem("id", data.id);
+
 
       },
       (error: any)=> {
