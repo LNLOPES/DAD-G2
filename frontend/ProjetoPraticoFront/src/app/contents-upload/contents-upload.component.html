@@ -1,18 +1,16 @@
 <div class="container">
-    <h4>Upload de novo arquivo</h4>
+    <h2 class="ajuste5">Upload de Novo Arquivo</h2>
 
-    <li>
-    <ul><label>Informe o Nome do Arquivo:</label>
-    <input type="text" id="nome"></ul>
+    <h4>Informe o Nome do Arquivo:</h4>
+    <input class="form-control ajuste5" type="text" id="nome" placeholder="Nome Arquivo...">
 
     
-    <ul><label>Informe uma Descrição:</label>
-    <input type="text" id="desc"></ul>
+    <h4>Informe uma Descrição:</h4>
+    <input class="form-control ajuste5" type="text"  id="desc" placeholder="Descrição Arquivo...">
     
-    <input  id="import" class="ajuste4" type="file"  (change)="onChange($event)"/>
+    <input  id="import"  type="file"  (change)="onChange($event)"/>
 
     <!-- <button class="btn btn-success ajuste3 btn-lg" (click)="CreateFile()">Confirmar</button>
     <button class="btn btn-danger  btn-lg">Cancelar</button> -->
 
-    </li>
     </div>

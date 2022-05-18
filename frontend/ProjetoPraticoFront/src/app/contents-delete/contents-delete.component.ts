@@ -3,13 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
 import Swal from 'sweetalert2';
 import { CrudService } from 'src/app/services/crud.service';
-
 @Component({
-  selector: 'app-contents',
-  templateUrl: './contents.component.html',
-  styleUrls: ['./contents.component.css']
+  selector: 'app-contents-delete',
+  templateUrl: './contents-delete.component.html',
+  styleUrls: ['./contents-delete.component.css']
 })
-export class ContentsComponent implements OnInit {
+export class ContentsDeleteComponent implements OnInit {
   idAtual: any;
   nome: any;
   constructor(private crudService:CrudService,private route:ActivatedRoute) { }
@@ -24,8 +23,6 @@ export class ContentsComponent implements OnInit {
     
   }
 
-
-
   DeleteFile(){
 
     Swal.fire({  
@@ -38,8 +35,8 @@ export class ContentsComponent implements OnInit {
       cancelButtonColor:"#DC143C"
     }).then(result => {
       if(result.isConfirmed){
-        this.crudService.deleteContent(this.idAtual);
-        Swal.fire('Arquivo Removido com Sucesso')
+        this.crudService.deleteTopico(this.idAtual);
+        Swal.fire('Tópico Removido com Sucesso')
 
         setTimeout(function(){ 
           window.location.href = "/";

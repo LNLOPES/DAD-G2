@@ -37,9 +37,9 @@ export class MateriaComponent implements OnInit {
         confirmButtonColor:"#228B22",
         cancelButtonColor:"#DC143C",
         html:'<div class="form-group">'+
-            '<label for="comment">Informe o nome da matéria: <br>'+'</label><br>'+
+            '<label for="comment">Informe o Nome da Matéria: <br>'+'</label><br>'+
             '<input class="form-control" id="nomeMateria"></input><br><br>'+
-            '<label for="comment">Informe a descrição da matéria: <br>'+'</label><br>'+
+            '<label for="comment">Informe a Descrição da Matéria: <br>'+'</label><br>'+
             '<input class="form-control" id="descMateria"></input><br><br>'+
           '</div>',
       }).then(result => {
@@ -68,6 +68,11 @@ export class MateriaComponent implements OnInit {
               
               //this.crudService.criaMateria(object);
               Swal.fire('Matéria Criada com sucesso')
+
+              setTimeout(function(){ 
+                location.reload();
+              }, 5000);
+              
             }
 
           })
@@ -91,6 +96,10 @@ export class MateriaComponent implements OnInit {
       if(result.isConfirmed){
         this.crudService.deleteMateria(id);
         Swal.fire('Matéria Removida com Sucesso')
+        setTimeout(function(){ 
+          location.reload();
+        }, 5000);
+        
       }
         
     })
@@ -115,9 +124,9 @@ export class MateriaComponent implements OnInit {
 
 }
 
-/* $(document).ready(function() {
+ $(document).ready(function() {
 
-  $('#example').DataTable( {
+/*   $('#example2').DataTable( {
     
       responsive: true,
       "language": {
@@ -134,11 +143,11 @@ export class MateriaComponent implements OnInit {
           "last": "Último"
       }
     }
-  } );
+  } ); */
 
  
   
 
  
 } );
- */
+ 

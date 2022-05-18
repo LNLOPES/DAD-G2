@@ -20,12 +20,13 @@ export class ContentsUploadComponent implements OnInit {
       this.key = objeto.key;
     })
 
-
+  
     
   }
 
   onChange(event:any){
 
+   
     var descMateria:string = $('#desc').val() as string;
     let nome:string = $('#nome').val() as string;
 
@@ -52,7 +53,13 @@ export class ContentsUploadComponent implements OnInit {
       }).then(result => {
         if(result.isConfirmed){
           this.crudService.createContent(fd);
-          Swal.fire('Arquivo Criado com Sucesso, bota reload nessas bagaça tudo ai') // estilizar e os crl
+          Swal.fire('Arquivo Criado com Sucesso') 
+          setTimeout(function(){ 
+            window.location.href = "/";
+          }, 10000);
+
+         
+          
         }
           
       })

@@ -38,6 +38,9 @@ export class VisaomateriaComponent implements OnInit {
       this.nome = objeto.nome;
     })
 
+    if (window.location.href.indexOf('reload')==-1) {
+      window.location.replace(window.location.href+'?reload');
+    }
     
   }
 /* 
@@ -103,37 +106,6 @@ export class VisaomateriaComponent implements OnInit {
   } */
 
 
-
-
-  alertNewTopico2(){
-      var nm = "loadingalerta" ;
-      $("#" + nm).remove();
-     
-      Swal.fire({  
-        icon: 'warning',  
-        title: 'Criar Novo Tópico ?',  
-        showCancelButton:true,
-        confirmButtonText:"Salvar",
-        cancelButtonText:"Cancelar",
-        confirmButtonColor:"#228B22",
-        cancelButtonColor:"#DC143C",
-        text: "Informe o Nome do Novo Tópico:",
-        input: 'text'
-      }).then(result => {
-        if(result.isConfirmed){
-          
-          if(result.value == null || result.value == ''){
-            alert("Por favor, preencha o campo Nome da matéria")
-            return
-          }
-
-          Swal.fire('Tópico Criado com sucesso')
-        
-        }
-          
-      })
-  }
-
   alertNewTopico(){
     var nm = "loadingalerta" ;
     $("#" + nm).remove();
@@ -165,7 +137,7 @@ export class VisaomateriaComponent implements OnInit {
 
         Swal.fire({  
           icon: 'warning',  
-          title: 'Tem Certeza que Deseja Criar Esta Matéria ?',  
+          title: 'Tem Certeza que Deseja Criar Este Tópico ?',  
           showCancelButton:true,
           confirmButtonText:"Sim",
           cancelButtonText:"Cancelar",
@@ -177,7 +149,11 @@ export class VisaomateriaComponent implements OnInit {
             this.crudService.criaTopicos(fd);
             
             //this.crudService.criaMateria(object);
-            Swal.fire('Matéria Criada com sucesso')
+            Swal.fire('Tópico Criado com sucesso')
+
+            setTimeout(function(){ 
+              location.reload();
+            }, 5000);
           }
 
         })
@@ -244,29 +220,45 @@ export class VisaomateriaComponent implements OnInit {
     })
   }
 
-  altertable(id:any){
+  altertable(id:any,title:any){
     
     var aux = [];
-    var tabela = '';
+    var tabela = ` <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Descricao</th>
+        <th>Ação</th>
+    </tr>
+</thead>
+<tbody>`;
     var button = '';
     this.contents.forEach((marca:any, indice:any) => {
       if(marca.topicId === id){
 
+      
         tabela += `<tr>
         <td>${marca.title}</td>
         <td>${marca.description}</td>
-        <td><a href="${marca.url}" target="_blank"><span class="glyphicon glyphicon-cloud-upload" style="color:blue;" aria-hidden="true"></span></a>
-        <a href="/contents/${marca.id}/${marca.title}" ><span class="glyphicon glyphicon-trash" style="color:red;" aria-hidden="true"></span></a></td>
+        <td><a title="Download" href="${marca.url}" target="_blank"><span class="glyphicon glyphicon-cloud-upload" style="color:blue;font-size:13px;" aria-hidden="true"></span></a>
+        <a title="Excluir" href="/contents/${marca.id}/${marca.title}" ><span class="glyphicon glyphicon-trash" style="color:red;font-size:13px;" aria-hidden="true"></span></a></td>
      </tr>`;
 
-      button = `<a href="/contents-upload/${marca.topicId}/${marca.disciplineId}" class="btn btn-info  btn-lg ajuste7"  type="button" id="button-addon2"><span class="glyphicon glyphicon-cloud-upload" style="color:white;" aria-hidden="true"></span><font color="white"> Enviar Arquivo</font></a>`;
+      button = `<a href="/contents-upload/${marca.topicId}/${marca.disciplineId}" class="btn btn-info  btn-lg ajuste7"  type="button" id="button-addon2"><span class="glyphicon glyphicon-cloud-upload" style="color:white;" aria-hidden="true"></span><font color="white"> Enviar Arquivo</font></a>
+      <a href="/contents-delete/${marca.topicId}/${title}" class="btn btn-danger  btn-lg ajuste7"  type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" style="color:white;" aria-hidden="true"></span><font color="white"> Apagar Tópico</font></a>`;
       }
+      tabela += `</tbody>`;
      
       $('#example').html(tabela);
       $('#exrt').html(button);
   });
 
-    
+    if(button == ''){
+      tabela = '';
+      $('#example').html(tabela);
+      button = `<a href="/contents-upload/${id}/${this.idAtual}" class="btn btn-info  btn-lg ajuste7"  type="button" id="button-addon2"><span class="glyphicon glyphicon-cloud-upload" style="color:white;" aria-hidden="true"></span><font color="white"> Enviar Arquivo</font></a>
+                <a href="/contents-delete/${id}/${title}" class="btn btn-danger  btn-lg ajuste7"  type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" style="color:white;" aria-hidden="true"></span><font color="white"> Apagar Tópico</font></a>`;
+      $('#exrt').html(button);
+    }
   }
   
   getter(){
