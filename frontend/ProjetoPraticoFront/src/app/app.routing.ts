@@ -6,14 +6,17 @@ import { MateriaComponent } from './materia/materia.component';
 import { VisaomateriaComponent } from './visaomateria/visaomateria.component';
 import { ContentsUploadComponent } from './contents-upload/contents-upload.component';
 import { ContentsDeleteComponent } from './contents-delete/contents-delete.component';
-const APP_ROUTES: Routes = [
-        {path: 'materia', component: MateriaComponent},
-        {path: 'visaomateria/:id/:nome', component: VisaomateriaComponent},
-        {path: 'contents/:id/:nome', component: ContentsComponent},
-        {path: 'contents-upload/:id/:key', component: ContentsUploadComponent},
-        {path: 'contents-delete/:id/:nome', component: ContentsDeleteComponent},
-        {path: '', component: HomeComponent}
+import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
+const APP_ROUTES: Routes = [
+        {path: 'materia', component: MateriaComponent, canActivate: [AuthGuardService]},
+        {path: 'visaomateria/:id/:nome', component: VisaomateriaComponent, canActivate: [AuthGuardService]},
+        {path: 'contents/:id/:nome', component: ContentsComponent, canActivate: [AuthGuardService]},
+        {path: 'contents-upload/:id/:key', component: ContentsUploadComponent, canActivate: [AuthGuardService]},
+        {path: 'contents-delete/:id/:nome', component: ContentsDeleteComponent, canActivate: [AuthGuardService]},
+        {path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
+        {path: '', component: LoginComponent }
 ];
 
 export const routing: ModuleWithProviders<any> = RouterModule.forRoot(APP_ROUTES);

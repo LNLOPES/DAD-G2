@@ -14,7 +14,7 @@
       </div> -->
     
     
-      <button  class="btn btn-success ajuste3 ajuste7  btn-lg" (click)="alertNewTopico()" type="button" id=""><span class="glyphicon glyphicon-plus" ></span> Novo Tópico</button>
+      <button *ngIf="auth.isProfessor()" class="btn btn-success ajuste3 ajuste7  btn-lg" (click)="alertNewTopico()" type="button" id=""><span class="glyphicon glyphicon-plus" ></span> Novo Tópico</button>
      <!--  <button class="btn btn-info  btn-lg ajuste7" (click)="alertNewFile()" type="button" id="button-addon2"><span class="glyphicon glyphicon-cloud-upload" style="color:white;" aria-hidden="true"></span><font color="white"> Enviar Arquivo</font></button>
        -->
       <div class="input-group mb-3" >

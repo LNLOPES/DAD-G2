@@ -8,6 +8,7 @@ import { CrudService } from 'src/app/services/crud.service';
 import { Topicos } from './../models/placeholder.model';
 import { Contents } from './../models/placeholder.model';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 const generateID = () => Math.round(Math.random() * 1000)
 @Component({
@@ -24,12 +25,9 @@ export class VisaomateriaComponent implements OnInit {
   erro: any;
   idAtual: any;
   nome:any;
-  constructor(private crudService:CrudService,private route:ActivatedRoute) { 
+  constructor(private crudService:CrudService,private route:ActivatedRoute, public auth: AuthService) { 
     this.getter();
     this.getterContents();
-
-    
-
   }
 
   ngOnInit(): void {
@@ -233,22 +231,31 @@ export class VisaomateriaComponent implements OnInit {
     var button = '';
     this.contents.forEach((marca:any, indice:any) => {
       if(marca.topicId === id){
-
-      
-        tabela += `<tr>
-        <td>${marca.title}</td>
-        <td>${marca.description}</td>
-        <td><a title="Download" href="${marca.url}" target="_blank"><span class="glyphicon glyphicon-cloud-upload" style="color:blue;font-size:13px;" aria-hidden="true"></span></a>
-        <a title="Excluir" href="/contents/${marca.id}/${marca.title}" ><span class="glyphicon glyphicon-trash" style="color:red;font-size:13px;" aria-hidden="true"></span></a></td>
-     </tr>`;
-
-      button = `<a href="/contents-upload/${marca.topicId}/${marca.disciplineId}" class="btn btn-info  btn-lg ajuste7"  type="button" id="button-addon2"><span class="glyphicon glyphicon-cloud-upload" style="color:white;" aria-hidden="true"></span><font color="white"> Enviar Arquivo</font></a>
-      <a href="/contents-delete/${marca.topicId}/${title}" class="btn btn-danger  btn-lg ajuste7"  type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" style="color:white;" aria-hidden="true"></span><font color="white"> Apagar Tópico</font></a>`;
+        if(this.auth.isProfessor()) {
+          tabela += `<tr>
+          <td>${marca.title}</td>
+          <td>${marca.description}</td>
+          <td><a title="Download" href="${marca.url}" target="_blank"><span class="glyphicon glyphicon-cloud-upload" style="color:blue;font-size:13px;" aria-hidden="true"></span></a>
+          <a title="Excluir" href="/contents/${marca.id}/${marca.title}" ><span class="glyphicon glyphicon-trash" style="color:red;font-size:13px;" aria-hidden="true"></span></a></td>
+          </tr>`;
+        } else {
+          tabela += `<tr>
+          <td>${marca.title}</td>
+          <td>${marca.description}</td>
+          <td><a title="Download" href="${marca.url}" target="_blank"><span class="glyphicon glyphicon-cloud-upload" style="color:blue;font-size:13px;" aria-hidden="true"></span></a></td>
+          </tr>`;
+        }
+        
+        button = `<a href="/contents-upload/${marca.topicId}/${marca.disciplineId}" class="btn btn-info  btn-lg ajuste7"  type="button" id="button-addon2"><span class="glyphicon glyphicon-cloud-upload" style="color:white;" aria-hidden="true"></span><font color="white"> Enviar Arquivo</font></a>
+        <a href="/contents-delete/${marca.topicId}/${title}" class="btn btn-danger  btn-lg ajuste7"  type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" style="color:white;" aria-hidden="true"></span><font color="white"> Apagar Tópico</font></a>`;
       }
+
       tabela += `</tbody>`;
      
       $('#example').html(tabela);
-      $('#exrt').html(button);
+
+      if(this.auth.isProfessor())
+        $('#exrt').html(button);
   });
 
     if(button == ''){
@@ -256,7 +263,9 @@ export class VisaomateriaComponent implements OnInit {
       $('#example').html(tabela);
       button = `<a href="/contents-upload/${id}/${this.idAtual}" class="btn btn-info  btn-lg ajuste7"  type="button" id="button-addon2"><span class="glyphicon glyphicon-cloud-upload" style="color:white;" aria-hidden="true"></span><font color="white"> Enviar Arquivo</font></a>
                 <a href="/contents-delete/${id}/${title}" class="btn btn-danger  btn-lg ajuste7"  type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" style="color:white;" aria-hidden="true"></span><font color="white"> Apagar Tópico</font></a>`;
-      $('#exrt').html(button);
+      
+      if(this.auth.isProfessor())
+        $('#exrt').html(button);
     }
   }
   
