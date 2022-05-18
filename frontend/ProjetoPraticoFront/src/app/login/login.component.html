@@ -1,0 +1,17 @@
+<div class="container-box">
+    <main class="conteudo form-signin">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <h1 class="text-center h3 mb-3 fw-normal">Gestão de Conteúdo</h1>
+
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingInput" formControlName="login" placeholder="Login">
+                <label for="floatingInput">Login</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" formControlName="senha" placeholder="Senha">
+                <label for="floatingPassword">Senha</label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+        </form>
+    </main>
+</div>

@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { ContentsComponent } from './contents/contents.component';
 import { ContentsUploadComponent } from './contents-upload/contents-upload.component';
 import { ContentsDeleteComponent } from './contents-delete/contents-delete.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ContentsDeleteComponent } from './contents-delete/contents-delete.compo
     CrudComponent,
     ContentsComponent,
     ContentsUploadComponent,
-    ContentsDeleteComponent
+    ContentsDeleteComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
