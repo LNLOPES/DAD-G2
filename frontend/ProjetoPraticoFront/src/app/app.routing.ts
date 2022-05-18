@@ -8,13 +8,14 @@ import { ContentsUploadComponent } from './contents-upload/contents-upload.compo
 import { ContentsDeleteComponent } from './contents-delete/contents-delete.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { RoleGuardService } from './services/role-guard.service';
 
 const APP_ROUTES: Routes = [
-        {path: 'materia', component: MateriaComponent, canActivate: [AuthGuardService]},
+        {path: 'materia', component: MateriaComponent, canActivate: [RoleGuardService], data: { expectedRole: 'cordenador' }},
         {path: 'visaomateria/:id/:nome', component: VisaomateriaComponent, canActivate: [AuthGuardService]},
         {path: 'contents/:id/:nome', component: ContentsComponent, canActivate: [AuthGuardService]},
-        {path: 'contents-upload/:id/:key', component: ContentsUploadComponent, canActivate: [AuthGuardService]},
-        {path: 'contents-delete/:id/:nome', component: ContentsDeleteComponent, canActivate: [AuthGuardService]},
+        {path: 'contents-upload/:id/:key', component: ContentsUploadComponent, canActivate: [RoleGuardService], data: { expectedRole: 'professor' }},
+        {path: 'contents-delete/:id/:nome', component: ContentsDeleteComponent, canActivate: [RoleGuardService], data: { expectedRole: 'professor' }},
         {path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
         {path: '', component: LoginComponent }
 ];

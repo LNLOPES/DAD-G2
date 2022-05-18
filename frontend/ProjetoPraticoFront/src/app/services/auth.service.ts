@@ -15,11 +15,23 @@ export class AuthService {
   }
 
   public isProfessor(): boolean {
-    return localStorage.getItem('login') == 'professor';
+    return localStorage.getItem('login') == 'professor' || localStorage.getItem('login') == 'cordenador';
   }
 
   public isCordenador(): boolean {
     return localStorage.getItem('login') == 'cordenador';
+  }
+
+  public isPermissaoAcesso(role: string): boolean {
+    if (role == 'professor') {
+      return localStorage.getItem('login') == 'professor' || localStorage.getItem('login') == 'cordenador';
+    }
+
+    if (role == 'cordenador') {
+      return localStorage.getItem('login') == 'cordenador';
+    }
+
+    return false;
   }
 
   public logout() {
