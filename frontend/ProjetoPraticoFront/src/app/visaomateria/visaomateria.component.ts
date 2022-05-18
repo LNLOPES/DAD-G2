@@ -231,7 +231,7 @@ export class VisaomateriaComponent implements OnInit {
     var button = '';
     this.contents.forEach((marca:any, indice:any) => {
       if(marca.topicId === id){
-        if(this.auth.isProfessor()) {
+        if(this.auth.isProfessor() || this.auth.isCordenador()) {
           tabela += `<tr>
           <td>${marca.title}</td>
           <td>${marca.description}</td>
@@ -254,7 +254,7 @@ export class VisaomateriaComponent implements OnInit {
      
       $('#example').html(tabela);
 
-      if(this.auth.isProfessor())
+      if (this.auth.isProfessor() || this.auth.isCordenador())
         $('#exrt').html(button);
   });
 
@@ -264,7 +264,7 @@ export class VisaomateriaComponent implements OnInit {
       button = `<a href="/contents-upload/${id}/${this.idAtual}" class="btn btn-info  btn-lg ajuste7"  type="button" id="button-addon2"><span class="glyphicon glyphicon-cloud-upload" style="color:white;" aria-hidden="true"></span><font color="white"> Enviar Arquivo</font></a>
                 <a href="/contents-delete/${id}/${title}" class="btn btn-danger  btn-lg ajuste7"  type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" style="color:white;" aria-hidden="true"></span><font color="white"> Apagar Tópico</font></a>`;
       
-      if(this.auth.isProfessor())
+      if(this.auth.isProfessor() || this.auth.isCordenador())
         $('#exrt').html(button);
     }
   }

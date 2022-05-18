@@ -18,6 +18,10 @@ export class AuthService {
     return localStorage.getItem('login') == 'professor';
   }
 
+  public isCordenador(): boolean {
+    return localStorage.getItem('login') == 'cordenador';
+  }
+
   public logout() {
     localStorage.clear();
   }

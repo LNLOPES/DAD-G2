@@ -40,6 +40,8 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("login", "aluno");
     } else if ( value.login?.toLowerCase() == "professor" ) {
       localStorage.setItem("login", "professor");
+    } else if ( value.login?.toLowerCase() == "cordenador" ) {
+      localStorage.setItem("login", "cordenador");
     } else {
       alert("Login não encontrado");
       return;
