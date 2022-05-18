@@ -22,6 +22,13 @@ namespace API_Contents.Controllers
             return Ok(await this.contentService.getContents());
         }
 
+        [Route("Topic/{topicId}")]
+        [HttpGet]
+        public async Task<IActionResult> findContentsByTopicId(Guid topicId)
+        {
+            return Ok(await this.contentService.findContentsByTopicId(topicId));
+        }
+
         [Route("{id}")]
         [HttpGet]
         public async Task<IActionResult> findContentById(Guid id)
