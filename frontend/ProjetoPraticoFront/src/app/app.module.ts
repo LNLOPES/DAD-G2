@@ -11,7 +11,9 @@ import { VisaomateriaComponent } from './visaomateria/visaomateria.component';
 import { HomeComponent } from './home/home.component';
 import { CrudComponent } from './componentes/crud/crud.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-
+import { FormsModule } from '@angular/forms';
+import { ContentsComponent } from './contents/contents.component';
+import { ContentsUploadComponent } from './contents-upload/contents-upload.component';
 
 @NgModule({
   declarations: [
@@ -19,15 +21,19 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MateriaComponent,
     VisaomateriaComponent,
     HomeComponent,
-    CrudComponent
+    CrudComponent,
+    ContentsComponent,
+    ContentsUploadComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    routing,
     HttpClientModule,
-    routing
+    FormsModule
+    
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]

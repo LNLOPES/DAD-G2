@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./crud.component.css']
 })
 export class CrudComponent implements OnInit {
-  materias = new Materias();
+  materias: any;
   erro: any;
   constructor(private crudService:CrudService) { 
     this.getter();

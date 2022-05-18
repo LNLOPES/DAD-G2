@@ -27,131 +27,30 @@
   
 <h1 style="text-align: center;">Matérias Cadastradas</h1>
   
-  <table id="example" class="display nowrap" style="width:100%">
+  <table id="example2" class="table table-striped table-bordered table-sm row-border hover" style="width:100%">
+  
     <thead>
         <tr>
             <th>Nome</th>
-            <th>Data Cadastro</th>
+            <th>Descricao</th>
             <th>Professor</th>
             <th>Ação</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td>POO</td>
-            <td>21 de Mai 2022</td>
-            <td>73 KB</td>
-            <td>
-              <button class="btn btn-outline-danger btn-lg" (click)="alertDeletePaste()" type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-          </td>
-        </tr>
-        <tr>
-            <td>ATP</td>
-            <td>20 de Mai 2022</td>
-            <td>83 KB</td>
-            <td>
-              <button class="btn btn-outline-danger btn-lg" (click)="alertDeletePaste()" type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
+      <tbody>
             
-        </tr>
-        <tr>
-            <td>AED</td>
-            <td>23 de Mai 2022</td>
-            <td>93 KB</td>
-            <td>
-              <button class="btn btn-outline-danger btn-lg" (click)="alertDeletePaste()" type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
-         
-        </tr>
-        <tr>
-            <td>Grafos</td>
-            <td>25 de Mai 2022</td>
-            <td>103 KB</td>
-            <td>
-              <button class="btn btn-outline-danger btn-lg" (click)="alertDeletePaste()" type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
-        </tr>
-        <tr>
-            <td>Projeto de software</td>
-            <td>18 de Mai 2022</td>
-            <td>73 KB</td>
-            <td>
-              <button class="btn btn-outline-danger btn-lg" (click)="alertDeletePaste()" type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
-        </tr>
-        <tr>
-          <td>Redes</td>
-          <td>19 de Mai 2022</td>
-          <td>103 KB</td>
-          <td>
-            <button class="btn btn-outline-danger btn-lg" (click)="alertDeletePaste()"  type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
-          
-      </tr>
-      <tr>
-          <td>TCC I</td>
-          <td>22 de Mai 2022</td>
-          <td>123 KB</td>
-          <td>
-            <button class="btn btn-outline-danger btn-lg" (click)="alertDeletePaste()" type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
-       
-      </tr>
-      <tr>
-          <td>TCC II</td>
-          <td>30 de Mai 2022</td>
-          <td>83 KB</td>
-          <td>
-            <button class="btn btn-outline-danger btn-lg" (click)="alertDeletePaste()" type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
-      </tr>
-        <tr>
-            <td>Filósofia</td>
-            <td>10 de Mai 2022</td>
-            <td>83 KB</td>
-            <td>
-              <button class="btn btn-outline-danger btn-lg" (click)="alertDeletePaste()" type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
-        </tr>
-       
-    <tr>
-        <td>Design</td>
-        <td>22 de Mai 2022</td>
-        <td>83 KB</td>
-        <td>
-          <button class="btn btn-outline-danger btn-lg" (click)="alertDeletePaste()" type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
-     
-    </tr>
-    <tr>
-        <td>CSS</td>
-        <td>22 de Mai 2022</td>
-        <td>83 KB</td>
-        <td>
-          <button class="btn btn-outline-danger btn-lg" (click)="alertDeletePaste()" type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
-    </tr>
-   
-    <tr>
-        <td>SOA 4</td>
-        <td>22 de Mai 2022</td>
-        <td>83 KB</td>
-        <td>
-          <button class="btn btn-outline-danger btn-lg" (click)="alertDeletePaste()"  type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
-    </tr>
-    <tr>
-        <td>API 3</td>
-        <td>22 de Mai 2022</td>
-        <td>83 KB</td>
-        <td>
-          <button class="btn btn-outline-danger btn-lg" (click)="alertDeletePaste()" type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
-    </tr>
-    <tr>
-        <td>API 2</td>
-        <td>22 de Mai 2022</td>
-        <td>83 KB</td>
-        <td>
-          <button class="btn btn-outline-danger btn-lg"  (click)="alertDeletePaste()" type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
-    </tr>
-  
+            <tr *ngFor="let i of materias">
+              <td>{{i.title}}</td>
+              <td>{{i.description}}</td>
+              <td>{{i.teacherId}}</td>
+              <td>
+                <button class="btn btn-outline-danger btn-lg" (click)="alertDeleteMateria(i.id)" type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+            </td>
+          </tr>
+
     </tbody>
-    <tfoot>
-        <tr>
-          <th>Nome</th>
-          <th>Data de Envio</th>
-          <th>Tamanho</th>
-          <th>Ação</th>
-        </tr>
-    </tfoot>
+        
+      
+  
   </table>
  
