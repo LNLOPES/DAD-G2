@@ -29,12 +29,14 @@ namespace API_Contents.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public async Task<IActionResult> postDiscipline(SaveDisciplineRequest discipline)
         {
             return Created("", discipline);
         }
 
+        [Authorize(Roles = "Administrador")]
         [Route("{id}")]
         [HttpPatch]
         public async Task<IActionResult> patchDiscipline([FromRoute] Guid id, SaveDisciplineRequest discipline)
@@ -42,6 +44,7 @@ namespace API_Contents.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Administrador")]
         [Route("{id}")]
         [HttpDelete]
         public async Task<IActionResult> deleteDiscipline([FromRoute] Guid id)

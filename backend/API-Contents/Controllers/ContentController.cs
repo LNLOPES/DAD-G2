@@ -29,12 +29,14 @@ namespace API_Contents.Controllers
             return Ok(await this.contentService.findContentById(id));
         }
 
+        [Authorize(Roles = "Administrador,Professor")]
         [HttpPost]
         public async Task<IActionResult> postContent([FromForm] SaveContentRequest content, IFormFile file)
         {
             return Created("", await this.contentService.saveContent(content, file));
         }
 
+        [Authorize(Roles = "Administrador,Professor")]
         [Route("{id}")]
         [HttpPatch]
         public async Task<IActionResult> patchContent([FromRoute] Guid id, [FromForm] SaveContentRequest content, IFormFile file)
@@ -42,6 +44,7 @@ namespace API_Contents.Controllers
             return Ok(await this.contentService.patchContent(id, content, file));
         }
 
+        [Authorize(Roles = "Administrador,Professor")]
         [Route("{id}")]
         [HttpDelete]
         public async Task<IActionResult> deleteContent([FromRoute] Guid id)
