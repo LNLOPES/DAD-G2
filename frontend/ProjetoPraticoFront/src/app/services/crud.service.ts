@@ -66,6 +66,17 @@ export class CrudService {
 
   }
 
+  public deleteTopico(id:any){
+    return this.http.delete('/api/Topics/'+id).subscribe((data:any) => {
+      console.log(data);
+    },
+    (error: any)=> {
+      console.error('ERROR: ',error);
+    })
+  }
+
+  
+
   public criaTopicos(mat:any){
     return this.http.post('/api/Topics',mat).subscribe((data:any) => {
       console.log(data);

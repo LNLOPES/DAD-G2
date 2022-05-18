@@ -14,6 +14,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ContentsComponent } from './contents/contents.component';
 import { ContentsUploadComponent } from './contents-upload/contents-upload.component';
+import { ContentsDeleteComponent } from './contents-delete/contents-delete.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ContentsUploadComponent } from './contents-upload/contents-upload.compo
     HomeComponent,
     CrudComponent,
     ContentsComponent,
-    ContentsUploadComponent
+    ContentsUploadComponent,
+    ContentsDeleteComponent
   ],
   imports: [
     CommonModule,
