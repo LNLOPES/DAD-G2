@@ -24,7 +24,9 @@ export class ContentsComponent implements OnInit {
     
   }
 
-
+  refresh(){
+    window.location.href = "/";
+  }
 
   DeleteFile(){
 

@@ -23,6 +23,9 @@ export class ContentsDeleteComponent implements OnInit {
     
   }
 
+  refresh(){
+    window.location.href = "/";
+  }
   DeleteFile(){
 
     Swal.fire({  
