@@ -10,6 +10,7 @@ namespace API_Contents.Services
     {
         public Task<List<Topic>> getTopics();
         public Task<Topic> findTopicById(Guid id);
+        public Task<List<Topic>> findTopicsByDisciplineId(Guid disciplineId);
         public Task<Topic> saveTopic(SaveTopicRequest topic);
         public Task deleteTopic(Guid id);
         public Task<Topic> patchTopic(Guid id, SaveTopicRequest topic);
@@ -38,8 +39,18 @@ namespace API_Contents.Services
             }
             
             return foundContent;
-            
-                
+        }
+
+        public async Task<List<Topic>> findTopicsByDisciplineId(Guid disciplineId)
+        {
+            List<Topic> foundTopics = await topicRepository.findTopicsByDisciplineId(disciplineId);
+
+            if (foundTopics == null || foundTopics.Count == 0)
+            {
+                throw new HttpException(404, "Topic not found");
+            }
+
+            return foundTopics;
         }
 
         public async Task<Topic> saveTopic(SaveTopicRequest? Topic)

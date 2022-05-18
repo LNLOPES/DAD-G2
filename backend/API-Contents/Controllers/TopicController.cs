@@ -28,6 +28,13 @@ namespace API_Contents.Controllers
             return Ok(await this.topicService.findTopicById(id));
         }
 
+        [Route("Discipline/{disciplineId}")]
+        [HttpGet]
+        public async Task<IActionResult> findTopicByDisciplineId(Guid disciplineId)
+        {
+            return Ok(await this.topicService.findTopicsByDisciplineId(disciplineId));
+        }
+
         [HttpPost]
         public async Task<IActionResult> postTopic([FromForm] SaveTopicRequest topic)
         {

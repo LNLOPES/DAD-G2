@@ -7,6 +7,7 @@ namespace API_Contents.Repository
     {
         public Task<List<Topic>> getTopics();
         public Task<Topic> findTopicById(Guid id);
+        public Task<List<Topic>> findTopicsByDisciplineId(Guid disciplineId);
         public Task<Topic> saveTopic(Topic topic);
         public void deleteTopic(Topic topic);
         public Task<Topic> patchTopic(Topic topic);
@@ -36,6 +37,22 @@ namespace API_Contents.Repository
 #pragma warning restore CS8600 // Conversão de literal nula ou possível valor nulo em tipo não anulável.
 
             return await Task.FromResult(topicReturn);
+        }
+
+        public async Task<List<Topic>> findTopicsByDisciplineId(Guid disciplineId)
+        {
+#pragma warning disable CS8600 // Conversão de literal nula ou possível valor nulo em tipo não anulável.
+            return await Task.FromResult((from t in this.contexto.Topics
+                                 where disciplineId == t.DisciplineId
+                                 select new Topic
+                                 {
+                                     Id = t.Id,
+                                     Title = t.Title,
+                                     Description = t.Description,
+                                     DisciplineId = t.DisciplineId
+                                 }).ToList());
+#pragma warning restore CS8600 // Conversão de literal nula ou possível valor nulo em tipo não anulável.
+
         }
 
         public async Task<List<Topic>> getTopics()

@@ -10,6 +10,7 @@ namespace API_Contents.Services
     {
         public Task<List<Content>> getContents();
         public Task<Content> findContentById(Guid id);
+        public Task<List<Content>> findContentsByTopicId(Guid topicId);
         public Task<Content> saveContent(SaveContentRequest content, IFormFile? file);
         public Task deleteContent(Guid id);
         public Task<Content> patchContent(Guid id, SaveContentRequest content, IFormFile? file);
@@ -40,6 +41,18 @@ namespace API_Contents.Services
             }
             else
                 return foundContent;
+        }
+
+        public async Task<List<Content>> findContentsByTopicId(Guid topicId)
+        {
+            List<Content>? foundContents = await contentRepository.findContentsByTopicId(topicId);
+
+            if (foundContents == null || foundContents.Count == 0)
+            {
+                throw new HttpException(404, "Contents not found");
+            }
+            else
+                return foundContents;
         }
 
         public async Task<Content> saveContent(SaveContentRequest content, IFormFile? file)
