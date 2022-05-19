@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using API_Contents.Models.DTOs;
 using API_Contents.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API_Contents.Controllers
 {
