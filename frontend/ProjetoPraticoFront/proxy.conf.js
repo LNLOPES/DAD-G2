@@ -1,11 +1,11 @@
 const PROXY_CONFIG = [
     {
         context:['/api'],
-        target: 'http://juansilva-001-site1.btempurl.com',
+        target: 'http://victorgontijo-001-site1.htempurl.com',
         secure: false,
         changeOrigin: true,
         logLevel: 'debug',
-        pathRewrite: { '^/api': '' }
+        //pathRewrite: { '^/api': '' }
     }
     
 

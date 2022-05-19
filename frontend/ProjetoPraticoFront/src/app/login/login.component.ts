@@ -11,7 +11,7 @@ import { CrudService } from 'src/app/services/crud.service';
 })
 export class LoginComponent implements OnInit {
   loginForm = this.formBuilder.group({
-    login: '',
+    email: '',
     senha: ''
   });
 
@@ -20,13 +20,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if ( this.auth.isAuthenticated() ) {
       this.router.navigate(['home']);  
-    }
+    } 
   }
 
   onSubmit(): void {
     let value = this.loginForm.value;
-
-    if ( value.login == "") {
+    if ( value.email == "") {
       alert("Login não informado");
       return;
     }
@@ -41,33 +40,36 @@ export class LoginComponent implements OnInit {
 
     this.crudService.Autenticacao(value).subscribe(
       (data:any) => {
-        localStorage.setItem("token", data.Bearer);
-        localStorage.setItem("id", data.id);
+        localStorage.setItem("token", data.bearer);
+        localStorage.setItem("id", data.id); 
+
+        if ( data.id == 11 ) {
+          localStorage.setItem("login", "aluno");
+          this.router.navigate(['home']);
+    
+        } else if ( data.id == 10 ) {
+          localStorage.setItem("login", "professor");
+          this.router.navigate(['home']);
+        } else if ( data.id == 8 ) {
+          localStorage.setItem("login", "cordenador");
+          this.router.navigate(['home']);
+        } else {
+          alert("Login não encontrado");
+    
+          return;
+        }
 
 
       },
       (error: any)=> {
         console.error('ERROR: ',error);
+        alert("Login não encontrado");
       }
       );
     
 
-    if ( value.login?.toLowerCase() == "aluno" ) {
-      localStorage.setItem("login", "aluno");
-
-
-    } else if ( value.login?.toLowerCase() == "professor" ) {
-      localStorage.setItem("login", "professor");
-
-    } else if ( value.login?.toLowerCase() == "cordenador" ) {
-      localStorage.setItem("login", "cordenador");
-
-    } else {
-      alert("Login não encontrado");
-
-      return;
-    }
-
-    this.router.navigate(['home']);
+  
+ 
+    
   }
 }
