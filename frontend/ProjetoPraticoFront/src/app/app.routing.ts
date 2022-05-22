@@ -17,6 +17,7 @@ const APP_ROUTES: Routes = [
         {path: 'contents-upload/:id/:key', component: ContentsUploadComponent, canActivate: [RoleGuardService], data: { expectedRole: 'professor' }},
         {path: 'contents-delete/:id/:nome', component: ContentsDeleteComponent, canActivate: [RoleGuardService], data: { expectedRole: 'professor' }},
         {path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
+        {path: 'login', component: LoginComponent},
         {path: '', component: LoginComponent }
 ];
 

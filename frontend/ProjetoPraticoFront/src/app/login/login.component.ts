@@ -3,6 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { CrudService } from 'src/app/services/crud.service';
+import jwt_decode from "jwt-decode";
+import { JwtToken } from '../models/placeholder.model';
 
 @Component({
   selector: 'app-login',
@@ -15,12 +17,51 @@ export class LoginComponent implements OnInit {
     senha: ''
   });
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private auth: AuthService,private crudService:CrudService ) { }
+  token: string = "";
+
+  constructor(private formBuilder: FormBuilder, 
+              private router: Router, 
+              private auth: AuthService,
+              private crudService:CrudService,
+              private actRoute: ActivatedRoute ) { }
 
   ngOnInit(): void {
-    if ( this.auth.isAuthenticated() ) {
-      this.router.navigate(['home']);  
-    } 
+    this.processaAutorizacao();
+  }
+
+  public processaAutorizacao() {
+    this.actRoute.queryParams
+    .subscribe(params => {
+      console.log(params)
+      try {
+        if ( params['token'] == null && this.auth.isAuthenticated() ||
+         (params['token'] != null && params['token'] == localStorage.getItem("token"))) {
+          this.router.navigate(['home']);
+          return;
+        }
+        const objToken:JwtToken = jwt_decode(params['token']);
+
+        localStorage.setItem("token", params['token']);
+        localStorage.setItem("id", objToken.nameid); 
+
+        if ( objToken.role.toLowerCase() == "aluno" ) {
+          localStorage.setItem("login", "aluno");
+          this.router.navigate(['home']);
+        } else if ( objToken.role.toLowerCase() == "professor" ) {
+          localStorage.setItem("login", "professor");
+          this.router.navigate(['home']);
+        } else if ( objToken.role.toLowerCase() == "administrador" ) {
+          localStorage.setItem("login", "cordenador");
+          this.router.navigate(['home']);
+        } else {
+          alert("Tipo de usuário não identificado");
+          return;
+        }
+
+      } catch (Error) {
+        alert("Não foi possível processar o token: " + params['token'] )
+      }
+    });
   }
 
   onSubmit(): void {
@@ -34,9 +75,6 @@ export class LoginComponent implements OnInit {
       alert("Senha não informada");
       return;
     }
-
-  
-
 
     this.crudService.Autenticacao(value).subscribe(
       (data:any) => {
@@ -66,10 +104,6 @@ export class LoginComponent implements OnInit {
         alert("Login não encontrado");
       }
       );
-    
-
-  
- 
-    
   }
+
 }

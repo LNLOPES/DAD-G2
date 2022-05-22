@@ -23,3 +23,8 @@ export class Contents {
     public topicId: number;
           
 }
+
+export class JwtToken {
+    public nameid:string;
+    public role:string;
+}
