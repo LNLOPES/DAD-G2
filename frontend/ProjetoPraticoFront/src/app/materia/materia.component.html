@@ -1,0 +1,54 @@
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+<div style="margin-left: 20px;">
+  <!--   <div class="page-header header">
+      <b><a ><font color="white">Desenv. de aplicações distribuídas</font></a></b><br><br>
+      
+    </div> -->
+  
+  
+    
+    <div class="input-group mb-3" >
+     <!--  <input type="text" class="ajuste"  placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2">
+      <button class="btn btn-outline-secondary" class="ajuste2" type="button" id="button-addon2"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+   -->
+      <button  class="btn btn-success ajuste3 ajuste4  btn-lg" (click)="alertNewMateria()" type="button" id=""><span class="glyphicon glyphicon-plus" ></span> Cadastrar Nova Matéria</button>
+  
+    </div>
+  
+    
+  </div>
+  
+  
+<h1 style="text-align: center;">Matérias Cadastradas</h1>
+  
+  <table id="example2" class="table table-striped table-bordered table-sm row-border hover" style="width:100%">
+  
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Descricao</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+      <tbody>
+            
+            <tr *ngFor="let i of materias">
+              <td>{{i.title}}</td>
+              <td>{{i.description}}</td>
+              <td>
+                <button class="btn btn-outline-danger btn-lg" (click)="alertDeleteMateria(i.id)" type="button" id="button-addon2"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+            </td>
+          </tr>
+
+    </tbody>
+        
+      
+  
+  </table>
+ 
