@@ -5,7 +5,6 @@ namespace API_Contents.Models.DTOs
     public class SaveContentRequest
     {
         [Required]
-        [StringLength(100)]
         public string? Title { get; set; }
         [Required]
         [StringLength(1000)]

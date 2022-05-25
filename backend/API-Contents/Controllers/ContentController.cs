@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using API_Contents.Models.DTOs;
 using API_Contents.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API_Contents.Controllers
 {
@@ -22,6 +23,13 @@ namespace API_Contents.Controllers
             return Ok(await this.contentService.getContents());
         }
 
+        [Route("Topic/{topicId}")]
+        [HttpGet]
+        public async Task<IActionResult> findContentsByTopicId(Guid topicId)
+        {
+            return Ok(await this.contentService.findContentsByTopicId(topicId));
+        }
+
         [Route("{id}")]
         [HttpGet]
         public async Task<IActionResult> findContentById(Guid id)
@@ -29,12 +37,14 @@ namespace API_Contents.Controllers
             return Ok(await this.contentService.findContentById(id));
         }
 
+        [Authorize(Roles = "Administrador,Professor")]
         [HttpPost]
         public async Task<IActionResult> postContent([FromForm] SaveContentRequest content, IFormFile file)
         {
             return Created("", await this.contentService.saveContent(content, file));
         }
 
+        [Authorize(Roles = "Administrador,Professor")]
         [Route("{id}")]
         [HttpPatch]
         public async Task<IActionResult> patchContent([FromRoute] Guid id, [FromForm] SaveContentRequest content, IFormFile file)
@@ -42,6 +52,7 @@ namespace API_Contents.Controllers
             return Ok(await this.contentService.patchContent(id, content, file));
         }
 
+        [Authorize(Roles = "Administrador,Professor")]
         [Route("{id}")]
         [HttpDelete]
         public async Task<IActionResult> deleteContent([FromRoute] Guid id)

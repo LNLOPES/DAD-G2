@@ -7,6 +7,7 @@ namespace API_Contents.Repository
     {
         public Task<List<Content>> getContents();
         public Task<Content> findContentById(Guid id);
+        public Task<List<Content>> findContentsByTopicId(Guid topicId);
         public Task<Content> saveContent(Content content);
         public void deleteContent(Content content);
         public Task<Content> patchContent(Content content);
@@ -38,6 +39,25 @@ namespace API_Contents.Repository
 #pragma warning restore CS8600 // Conversão de literal nula ou possível valor nulo em tipo não anulável.
 
             return await Task.FromResult(contentReturn);
+        }
+
+
+        public async Task<List<Content>> findContentsByTopicId(Guid topicId)
+        {
+#pragma warning disable CS8600 // Conversão de literal nula ou possível valor nulo em tipo não anulável.
+            return await Task.FromResult((from c in this.contexto.Contents
+                                          where topicId == c.TopicId
+                                          select new Content
+                                          {
+                                              Id = c.Id,
+                                              Title = c.Title,
+                                              Description = c.Description,
+                                              Url = c.Url,
+                                              DisciplineId = c.DisciplineId,
+                                              TopicId = c.TopicId
+                                          }).ToList());
+#pragma warning restore CS8600 // Conversão de literal nula ou possível valor nulo em tipo não anulável.
+
         }
 
         public async Task<List<Content>> getContents()

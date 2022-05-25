@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using API_Contents.Models.DTOs;
 using API_Contents.Services;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace API_Contents.Controllers
 {
@@ -9,41 +9,54 @@ namespace API_Contents.Controllers
     [Route("[controller]")]
     public class TopicsController : ControllerBase
     {
-        public TopicsController(IContentsService contentService)
+        private readonly ITopicsService topicService;
+        public TopicsController(ITopicsService topicService)
         {
-            //this.contentService = contentService;
+            this.topicService = topicService;
         }
 
         [HttpGet]
         public async Task<IActionResult> getTopics()
         {
-            return Ok();
+            return Ok(await this.topicService.getTopics());
         }
 
         [Route("{id}")]
         [HttpGet]
-        public async Task<IActionResult> findDisciplineById(Guid id)
+        public async Task<IActionResult> findTopicById(Guid id)
         {
-            return Ok();
+            return Ok(await this.topicService.findTopicById(id));
         }
 
+        [Route("Discipline/{disciplineId}")]
+        [HttpGet]
+        public async Task<IActionResult> findTopicByDisciplineId(Guid disciplineId)
+        {
+            return Ok(await this.topicService.findTopicsByDisciplineId(disciplineId));
+        }
+        
+        [Authorize(Roles = "Professor")]
         [HttpPost]
-        public async Task<IActionResult> postDiscipline(SaveTopicRequest topic)
+        public async Task<IActionResult> postTopic([FromForm] SaveTopicRequest topic)
         {
-            return Created("", topic);
+            return Created("", await this.topicService.saveTopic(topic));
         }
 
+        [Authorize(Roles = "Administrador,Professor")]
         [Route("{id}")]
         [HttpPatch]
-        public async Task<IActionResult> patchDiscipline([FromRoute] Guid id, SaveTopicRequest topic)
+        public async Task<IActionResult> patchTopic([FromRoute] Guid id, [FromForm] SaveTopicRequest topic)
         {
-            return NoContent();
+            return Ok(await this.topicService.patchTopic(id, topic));
         }
 
+        [Authorize(Roles = "Administrador,Professor")]
         [Route("{id}")]
         [HttpDelete]
-        public async Task<IActionResult> deleteDiscipline([FromRoute] Guid id)
+        public async Task<IActionResult> deleteTopic([FromRoute] Guid id)
         {
+            await topicService.deleteTopic(id);
+
             return NoContent();
         }
     }
